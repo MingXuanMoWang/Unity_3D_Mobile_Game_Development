@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FPSPlayer : MonoBehaviour
 {
-    public Transform m_transform;
-    public Transform m_camTransform;
+    public Transform m_transform { get; set; }
+    public Transform m_camTransform { get; set; }
     private Vector3 m_camRot;
     float m_camHeight = 1.4f;
 
@@ -14,6 +14,12 @@ public class FPSPlayer : MonoBehaviour
     private float m_moveSpeed = 3.0f;
 
     private float m_gravity = 2.0f;
+
+    public Transform m_muzzlepoint;
+    public LayerMask m_layer;
+    public Transform m_fx;
+    public AudioClip m_audio;
+    private float m_shootTimer = 0;
 
     public int m_life = 5;
     // Start is called before the first frame update
@@ -37,6 +43,31 @@ public class FPSPlayer : MonoBehaviour
             return;
         }
         Control();
+
+        m_shootTimer -= Time.deltaTime;
+        if(Input.GetMouseButton(0) && m_shootTimer <= 0)
+        {
+            m_shootTimer = 0.1f;
+            this.GetComponent<AudioSource>().PlayOneShot(m_audio);
+            FPSGameManager.Instance.SetAmmo(1);
+            RaycastHit info;
+            bool hit = Physics.Raycast(m_muzzlepoint.position, m_camTransform.TransformDirection(Vector3.forward), out info, 100, m_layer);
+            if (hit)
+            {
+                Debug.Log("击中目标：" + info.transform.tag);
+                if(info.transform.tag.CompareTo("Enemy") == 0)
+                {
+                    FPSEnemy enemy = info.transform.GetComponent<FPSEnemy>();
+                    if (enemy != null)
+                    {
+                        enemy.OnDamage(1);
+                    }
+                }
+
+                var fx = Instantiate(m_fx, info.point, info.transform.rotation);
+                Destroy(fx.gameObject, 1.0f);
+            }
+        }
     }
 
     void Control()
@@ -59,6 +90,16 @@ public class FPSPlayer : MonoBehaviour
         m_transform.eulerAngles = camrot;
     
         m_camTransform.position = m_transform.TransformPoint(0, m_camHeight, 0);
+    }
+    
+    public void OnDamage(int damage)
+    {
+        m_life -= damage;
+        FPSGameManager.Instance.SetLife(m_life);
+        if (m_life <= 0)
+        {
+            Screen.lockCursor = false;
+        }
     }
 
     void OnDrawGizmos()
