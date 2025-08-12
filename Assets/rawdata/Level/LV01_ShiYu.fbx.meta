@@ -1,27 +1,13 @@
 fileFormatVersion: 2
-guid: 9249099a7f66c934e8d1ad38e6feea7d
+guid: b5306ffc2515844438bacd7bee866af1
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pCube3
-    100004: pCube4
-    100006: pCube5
     400000: //RootNode
-    400002: pCube3
-    400004: pCube4
-    400006: pCube5
     2300000: //RootNode
-    2300002: pCube3
-    2300004: pCube4
-    2300006: pCube5
     3300000: //RootNode
-    3300002: pCube3
-    3300004: pCube4
-    3300006: pCube5
-    4300000: pCube3
-    4300002: pCube4
-    4300004: pCube5
+    4300000: LV01_ShiYu
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -74,5 +60,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
-  additionalBone: 1
+  additionalBone: 0
   userData: 

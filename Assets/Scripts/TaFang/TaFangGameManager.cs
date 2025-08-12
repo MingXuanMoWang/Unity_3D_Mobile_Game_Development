@@ -29,7 +29,10 @@ public class TaFangGameManager : MonoBehaviour
     public Button m_but_player2;
 
     private bool m_isSelectedButton = false;
-
+    public bool m_debug = true; 
+    public List<PathNode> m_PathNodes; 
+    
+    public List<TaFangEnemy> m_EnemyList = new List<TaFangEnemy>();
     private void Awake()
     {
         Instance = this;
@@ -76,7 +79,7 @@ public class TaFangGameManager : MonoBehaviour
         trigger2.triggers.Add(up);
 
 
-        // BuildPath();
+        BuildPath();
     }
 
     // Update is called once per frame
@@ -201,7 +204,7 @@ public class TaFangGameManager : MonoBehaviour
     [ContextMenu("BuildPath")]
     void BuildPath()
     {
-        // m_PathNodes = new List<PathNode>();
+        m_PathNodes = new List<PathNode>();
         // 通过路点的Tag查找所有的路点
         GameObject[] objs = GameObject.FindGameObjectsWithTag("pathnode");
         for (int i = 0; i < objs.Length; i++)
@@ -211,19 +214,19 @@ public class TaFangGameManager : MonoBehaviour
     }
 
 
-    // void OnDrawGizmos()
-    // {
-    //     if (!m_debug || m_PathNodes == null)
-    //         return;
-    //
-    //     Gizmos.color = Color.blue; // 将路点连线的颜色设为蓝色
-    //     foreach (PathNode node in m_PathNodes) // 遍历路点
-    //     {
-    //         if (node.m_next != null)
-    //         {
-    //             // 在路点间画出连接线
-    //             Gizmos.DrawLine(node.transform.position, node.m_next.transform.position);
-    //         }
-    //     }
-    // }
+    void OnDrawGizmos()
+    {
+        if (!m_debug || m_PathNodes == null)
+            return;
+    
+        Gizmos.color = Color.blue; // 将路点连线的颜色设为蓝色
+        foreach (PathNode node in m_PathNodes) // 遍历路点
+        {
+            if (node.m_next != null)
+            {
+                // 在路点间画出连接线
+                Gizmos.DrawLine(node.transform.position, node.m_next.transform.position);
+            }
+        }
+    }
 }
