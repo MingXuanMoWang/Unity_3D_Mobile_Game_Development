@@ -28,7 +28,7 @@ public class Archer : Defender {
         yield return new WaitForSeconds(ani_lenght * 0.5f); 
         if (m_targetEnemy != null) 
         {
-            Vector3 pos = this.m_model.transform.Find("atkpoint").position;
+            Vector3 pos = this.m_model.transform.position;
             
             Projectile.Create(m_targetEnemy.transform, pos, (TaFangEnemy enemy) =>
             {

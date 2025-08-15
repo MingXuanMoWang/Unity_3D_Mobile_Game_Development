@@ -191,8 +191,9 @@ public class TaFangGameManager : MonoBehaviour
         // 检测是否与地面相碰撞
         if (Physics.Raycast(ray, out hitinfo, 1000, m_groundlayer))
         {
+            Debug.Log("碰撞点位置：" + hitinfo.point);
             // 如果选中的是一个可用的格子
-            if (TileObject.Instance.getDataFromPosition(hitinfo.point.x, hitinfo.point.z) == (int)Defender.TileStatus.GUARD)
+            // if (TileObject.Instance.getDataFromPosition(hitinfo.point.x, hitinfo.point.z) == (int)Defender.TileStatus.GUARD)
             {
                 // 获得碰撞点位置
                 Vector3 hitpos = new Vector3(hitinfo.point.x, 0, hitinfo.point.z);

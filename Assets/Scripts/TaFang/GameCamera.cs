@@ -7,7 +7,7 @@ public class GameCamera : MonoBehaviour
 {
     public static GameCamera Inst = null;
     // 摄像机距离地面的距离
-    protected float m_distance = 15;
+    protected float m_distance = 10;
     // 摄像机的角度
     protected Vector3 m_rot = new Vector3(-55, 180, 0);
     // 摄像机的移动速度

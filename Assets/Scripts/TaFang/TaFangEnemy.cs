@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TaFangEnemy : MonoBehaviour
 {
@@ -11,12 +12,28 @@ public class TaFangEnemy : MonoBehaviour
     public int m_maxlife = 15;
 
     public float m_speed = 2;
-
+    private Transform m_lifebarObj;
+    Slider m_lifebar;
     public System.Action<TaFangEnemy> onDeath;
     // Start is called before the first frame update
     void Start()
     {
         TaFangGameManager.Instance.m_EnemyList.Add(this);
+
+        GameObject prefab = (GameObject)Resources.Load("Canvas3D");
+        m_lifebarObj = ((GameObject)Instantiate(prefab, Vector3.zero, Camera.main.transform.rotation, this.transform)).transform;
+        m_lifebarObj.localPosition = new Vector3(0, 2.0f, 0);
+        m_lifebarObj.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+        m_lifebar = m_lifebarObj.GetComponentInChildren<Slider>();
+        StartCoroutine(UpdateLifebar());
+    }
+    
+    IEnumerator UpdateLifebar()
+    {
+        m_lifebar.value = (float)m_life / (float)m_maxlife;
+        m_lifebarObj.transform.eulerAngles = Camera.main.transform.eulerAngles;
+        yield return 0;
+        StartCoroutine(UpdateLifebar());
     }
 
     // Update is called once per frame

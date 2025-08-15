@@ -43,6 +43,7 @@ public class Defender : MonoBehaviour
 
     protected virtual void CreateModel(string myname)
     {
+        Debug.Log("创建防御塔模型：" + myname);
         GameObject model = Resources.Load<GameObject>(myname);
         m_model = (GameObject)Instantiate(model, this.transform.position, this.transform.rotation, this.transform);
         m_ani = m_model.GetComponent<Animator>();
