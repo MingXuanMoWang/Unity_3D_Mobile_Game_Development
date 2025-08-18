@@ -21,9 +21,9 @@ TagManager:
   - dummy
   - tile
   - 
-  - 
-  - 
-  - 
+  - background
+  - fish
+  - weapon
   - 
   - 
   - 
@@ -44,4 +44,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 2031605195
+    locked: 0
+  - name: fish
+    uniqueID: 3845114753
+    locked: 0
+  - name: weapon
+    uniqueID: 1670123447
     locked: 0
